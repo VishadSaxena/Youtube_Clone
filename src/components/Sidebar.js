@@ -1,4 +1,38 @@
+import { useSelector } from "react-redux";
+
 const Sidebar = () => {
+
+    const isSidebarOpen = useSelector(store => store.app.isSidebarOpen);
+
+    if(!isSidebarOpen) return (
+        <div className="p-4 m-2 w-32 shadow-lg">
+            <div className="cursor-pointer">
+                <img className="w-8 ml-6" alt="home" src="https://cdn-icons-png.flaticon.com/512/60/60817.png"/>
+                <span className="ml-5"> Home </span>
+            </div>
+            <div className="my-4 cursor-pointer">
+                <img className="w-6 ml-6" alt="shorts" src="https://seeklogo.com/images/Y/youtube-shorts-logo-E2B507EF18-seeklogo.com.png"/>
+                <span className="ml-5"> Shorts </span>
+            </div>
+            <div className="my-4 cursor-pointer">
+                <img className="w-6 ml-6" alt="Subscription" src="https://icons.iconarchive.com/icons/pictogrammers/material/512/youtube-subscription-icon.png"/>
+                <span className=""> Subscriptions </span>
+            </div>
+            <div className="my-4 cursor-pointer">
+                <img className="w-6 ml-6" alt="Youtube Music" src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-music-4560391-3789455.png"/>
+                <span className="ml-5"> Music </span>
+            </div>
+            <div className="my-4 cursor-pointer">
+                <img className="w-6 ml-6" alt="Your Channel" src="https://cdn-icons-png.flaticon.com/512/60/60817.png"/>
+                <span className="ml-5"> You </span>
+            </div>
+            <div className="my-4 cursor-pointer">
+                <img className="w-6 ml-6" alt="Downloads" src="https://static.thenounproject.com/png/770591-200.png"/>
+                <span className="ml-2"> Downloads </span>
+            </div>
+        </div>
+    );
+
     return <div>
         <div className="p-4 m-2 w-56 shadow-lg">
             <ul>
@@ -20,7 +54,7 @@ const Sidebar = () => {
                 </div>  
                 <div className="flex">
                     <li className="p-2 cursor-pointer">
-                        <img className="w-6" alt="Music" src="https://icons.iconarchive.com/icons/pictogrammers/material/512/youtube-subscription-icon.png"/>
+                        <img className="w-6" alt="Subscription" src="https://icons.iconarchive.com/icons/pictogrammers/material/512/youtube-subscription-icon.png"/>
                     </li>
                     <span className="p-2 font-semibold text-lg cursor-pointer">
                         Subscriptions

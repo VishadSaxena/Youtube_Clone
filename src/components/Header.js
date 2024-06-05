@@ -1,10 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { toggleSidebar } from '../utils/appSlice';
 
 const Header = () => {
+
+    const dispatch = useDispatch();
+
+    const toggleSidebarHandler = () => {
+        dispatch(toggleSidebar());
+    }
+
   return (
     <div className='grid grid-flow-col shadow-lg bg-gray-300'>
         <div className='m-2 p-4 col-span-1 flex'>
-            <img className='w-18 h-8 cursor-pointer' alt="SideBar Menu" src="https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp" />
+            <img className='w-18 h-8 cursor-pointer' alt="SideBar Menu" src="https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp" 
+                onClick={() => toggleSidebarHandler()}
+            />
             <img className='mx-2 h-8 cursor-pointer' alt='Logo' src= "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"/>
 
 
