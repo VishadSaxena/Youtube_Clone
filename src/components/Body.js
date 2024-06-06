@@ -1,9 +1,17 @@
+import ButtonList from "./ButtonList";
 import Sidebar from "./Sidebar";
 
 const Body = () => {
+
+
     return (
-        <div className="grid grid-flow-col">
-            <Sidebar/>
+        <div className="flex">
+            <div className="">
+                <Sidebar/>
+            </div>
+            <div className="">
+                <ButtonList/>
+            </div>
         </div>
     )
 }
