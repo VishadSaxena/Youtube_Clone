@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
 
@@ -6,10 +7,12 @@ const Sidebar = () => {
 
     if(!isSidebarOpen) return (
         <div className="p-4 m-2 w-32 shadow-lg">
+            <Link to="/">
             <div className="cursor-pointer hover:bg-gray-200">
                 <img className="w-8 ml-6" alt="home" src="https://cdn-icons-png.flaticon.com/512/60/60817.png"/>
                 <span className="ml-5"> Home </span>
             </div>
+            </Link>
             <div className="my-4 cursor-pointer hover:bg-gray-200">
                 <img className="w-6 ml-6" alt="shorts" src="https://seeklogo.com/images/Y/youtube-shorts-logo-E2B507EF18-seeklogo.com.png"/>
                 <span className="ml-5"> Shorts </span>
@@ -40,9 +43,9 @@ const Sidebar = () => {
                     <li className="p-2 cursor-pointer ">
                         <img className="w-6" alt="home" src="https://cdn-icons-png.flaticon.com/512/60/60817.png"/>
                     </li>
-                    <span className="p-2 font-semibold text-lg cursor-pointer">
+                    <Link to="/"><span className="p-2 font-semibold text-lg cursor-pointer">
                         Home
-                    </span>
+                    </span></Link>
                 </div>
                 <div className="flex hover:bg-gray-200">
                     <li className="p-2 cursor-pointer ">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleSidebar } from '../utils/appSlice';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -16,7 +17,7 @@ const Header = () => {
             <img className='w-18 h-8 cursor-pointer hover:bg-gray-200' alt="SideBar Menu" src="https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp" 
                 onClick={() => toggleSidebarHandler()}
             />
-            <img className='mx-2 h-8 cursor-pointer' alt='Logo' src= "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"/>
+            <a href='/'><img className='mx-2 h-8 cursor-pointer' alt='Logo' src= "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" /></a>
 
 
         </div>
