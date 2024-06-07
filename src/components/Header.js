@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleSidebar } from '../utils/appSlice';
-import { Link } from 'react-router-dom';
 
 const Header = () => {
 
+    const [searchItem,setSearchItem] = useState("🔍 Search");
     const dispatch = useDispatch();
 
     const toggleSidebarHandler = () => {
@@ -24,7 +24,7 @@ const Header = () => {
 
         <div className='w-8/12 my-5 ml-60 px-14 col-span-10'>
 
-            <input type='text' className="px-5 w-2/3 rounded-l-full p-2 border border-gray-400"/>
+            <input type='text' className="px-5 w-2/3 rounded-l-full p-2 border border-gray-400" value={searchItem} onChange={(e)=>setSearchItem(e.target.value)} onClick={() => setSearchItem("")} />
             <button className="px-5 py-2 border border-gray-400 rounded-r-full hover:bg-gray-200"> 🔍 </button>
 
         </div>
