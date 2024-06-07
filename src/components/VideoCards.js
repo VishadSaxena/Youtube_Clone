@@ -4,7 +4,6 @@ const VideoCards = ({ info }) => {
 
     const { snippet, statistics } = info;
     const { channelTitle, title, thumbnails} = snippet;
-    const d = new Date();
   
     return (
       <div className="p-2 m-2 w-72 shadow-lg hover:bg-gray-200">

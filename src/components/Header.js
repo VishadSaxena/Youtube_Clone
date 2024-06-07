@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleSidebar } from '../utils/appSlice';
+import { YOUTUBE_SUGGESTION_API } from '../utils/constants';
 
 const Header = () => {
 
     const [searchItem,setSearchItem] = useState("🔍 Search");
+    const [showSuggestion,setShowSuggestion] = useState(false);
+    const [suggestions, setSuggestions] = useState([]);
     const dispatch = useDispatch();
 
     const toggleSidebarHandler = () => {
         dispatch(toggleSidebar());
+    }
+
+    useEffect(()=>{
+       const timer = setTimeout(() => suggestionApi(),200);
+       
+       return () => {
+        clearTimeout(timer);
+       };
+    }, [searchItem] );
+
+    const suggestionApi = async () => {
+        const data = await fetch(YOUTUBE_SUGGESTION_API + searchItem);
+        const json = await data.json();
+        setSuggestions(json[1]);
+        //console.log(json[1]);
     }
 
   return (
@@ -24,9 +42,23 @@ const Header = () => {
 
         <div className='w-8/12 my-5 ml-60 px-14 col-span-10'>
 
-            <input type='text' className="px-5 w-2/3 rounded-l-full p-2 border border-gray-400" value={searchItem} onChange={(e)=>setSearchItem(e.target.value)} onClick={() => setSearchItem("")} />
+            <input type='text' className="px-5 w-2/3 rounded-l-full p-2 border border-gray-400" value={searchItem} onChange={(e)=>setSearchItem(e.target.value)} onClick={() => setSearchItem("")} onFocus={()=> setShowSuggestion(true)} onBlur={() => setShowSuggestion(false)} />
             <button className="px-5 py-2 border border-gray-400 rounded-r-full hover:bg-gray-200"> 🔍 </button>
-
+            {showSuggestion && (
+                <div className="absolute bg-white py-3 px-2 w-[36rem] shadow-lg rounded-2xl border border-gray-100">
+                    <ul>
+                        {suggestions.map((s) => 
+                            
+                                <li key={s} className="flex py-2 px-3 shadow-sm hover:bg-gray-100"> 
+                                <img className='w-8 pr-2' alt="search" src="https://cdn-icons-png.flaticon.com/512/2961/2961948.png"/>
+                                    {s}
+                                </li>)
+                            
+                        }
+            
+                    </ul>
+                </div>
+            )}
         </div>
 
         <div className="col-span-1 pt-6 cursor-pointer">
