@@ -3,6 +3,7 @@ import { closeSidebar } from "../utils/appSlice";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import CommentContainer from "./CommentContainer";
+import Subscriber from "./Subscriber";
 
 
 const WatchPage = () => {
@@ -32,8 +33,8 @@ const WatchPage = () => {
                     allowFullScreen 
                     className="rounded-3xl shadow-lg">   
                 </iframe>
-                <div className="shadow-lg bg-gray-200 rounded-lg h-32 mt-6">
-                    Subscriber Bloc
+                <div className="shadow-lg rounded-lg h-32 mt-6">
+                    <Subscriber/>
                 </div>
                 <div className="shadow-lg bg-gray-200 rounded-lg h-32 mt-6">
                     <CommentContainer />
