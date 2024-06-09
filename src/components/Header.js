@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../utils/appSlice';
 import { YOUTUBE_SUGGESTION_API } from '../utils/constants';
+import { cacheSearch } from '../utils/searchSlice';
 
 const Header = () => {
 
     const [searchItem,setSearchItem] = useState("🔍 Search");
     const [showSuggestion,setShowSuggestion] = useState(false);
     const [suggestions, setSuggestions] = useState([]);
+   
+    const searchCache = useSelector((store) => store.search);
     const dispatch = useDispatch();
 
     const toggleSidebarHandler = () => {
@@ -15,7 +18,14 @@ const Header = () => {
     }
 
     useEffect(()=>{
-       const timer = setTimeout(() => suggestionApi(),200);
+       const timer = setTimeout(() =>{
+        if(searchCache[searchItem]){
+            setSuggestions(searchCache[searchItem]);   
+        }
+        else {
+                suggestionApi();
+             }
+        },200);
        
        return () => {
         clearTimeout(timer);
@@ -27,7 +37,11 @@ const Header = () => {
         const json = await data.json();
         setSuggestions(json[1]);
         //console.log(json[1]);
-    }
+        dispatch(cacheSearch({
+            [searchItem]: json[1], 
+        })
+    );
+    };
 
   return (
     <div className='grid grid-flow-col shadow-lg bg-gray-300'>
