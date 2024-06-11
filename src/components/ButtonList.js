@@ -4,7 +4,7 @@ import Button from "./Button";
 const ButtonList = () => {
     return (
         
-        <div className="slide flex ml-2 mt-2 flex-wrap">
+        <div className="flex flex-wrap ml-2 mt-2 overflow-auto">
             <div className="mt-3 m-2 px-4 py-2 shadow-lg text-center w-auto h-10 bg-gray-300 rounded-xl hover:bg-gray-200 hover:bg-gray-200">
                 <Button name="All"/>
             </div>
