@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ChatMessage from './ChatMessage';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMessage } from '../utils/chatSlice';
+import { generateRandomName, makeRandomMessage } from '../utils/helper';
 
 const LiveChat = () => {
 
@@ -9,13 +10,15 @@ const LiveChat = () => {
 
   const chatMessages = useSelector(store => store.chat.messages);
 
+  const [liveMessage,setLiveMessage] = useState(""); 
+
   useEffect(() => {
     const i = setInterval(() => {
       // console.log("API Polling");
 
       dispatch(addMessage({
-        name: "Vishad",
-        message: "Om Namah Shivay",
+        name: generateRandomName(),
+        message: makeRandomMessage(20),
       }));
     },2000 );
 
@@ -23,24 +26,35 @@ const LiveChat = () => {
   },[]);
 
   return (
-     <div className="h-[600px] my-1 mx-8 rounded-lg border border-black w-[600px] overflow-y-scroll">
-       <div className="p-1 bg-slate-100">
-         {
+    <div className="flex flex-col rounded-lg border border-black my-1 mx-8">
+      <div className="w-[600px] overflow-y-scroll flex flex-col-reverse h-[510px] ">
+        <div className="py-1 bg-slate-100">
+          {
               chatMessages.map((c,index) => 
            (<ChatMessage key={index} name={c.name} message={c.message}/>)
-         )}
-         </div>
+          )}
+        </div>
+      </div>
+     <br></br>
+     <div className="flex pb-4">
+      <form onSubmit={(e)=> {
+        e.preventDefault();
+        dispatch(
+          addMessage({
+            name: "Vishad Saxena",
+            message: liveMessage,
+          })
+        );
+        setLiveMessage("");
+      } }>
+        <input className="border shadow-3xl rounded-full w-[460px] h-8 my-1 mx-8 p-2" value={liveMessage} type="text" onChange={(e) => setLiveMessage(e.target.value) }/>
+      
+      <button className="shadow-xl rounded-full items-center w-8 my-1" >
+        >
+      </button>
+      </form>
      </div>
-    // <div className="h-[600px] ml-2 p-2 border border-black bg-slate-100 rounded-lg overflow-y-scroll flex flex-col-reverse">
-    //     <div>
-    //       {
-    //         // Disclaimer: Don't use indexes as keys
-    //         chatMessages.map((c, i) => (
-    //           <ChatMessage key={i} name={c.name} message={c.message} />
-    //         ))
-    //       }
-    //     </div>
-    //   </div>
+    </div>
   );
 };
 
